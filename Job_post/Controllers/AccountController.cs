@@ -28,7 +28,7 @@ namespace Job_post.Controllers
                 }
             }
         }
-        
+        [Route("api/Account/Get")]
         public HttpResponseMessage Get()
         {
             using (DataContext dBContext = new DataContext())
@@ -39,6 +39,7 @@ namespace Job_post.Controllers
         //post signup
         [HttpPost]
         [Route("api/Account/SignupPost")]
+        //[CustomAuthenticationFilter]
         public HttpResponseMessage SignupPost([FromBody] LoginData user)
         {
             try
@@ -56,5 +57,47 @@ namespace Job_post.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
+
+        [HttpGet]
+        [Route("api/Account/GetUserProfile/{email}")]
+        public HttpResponseMessage GetUserProfile(string email)
+        {
+            using (DataContext dBContext = new DataContext())
+            {
+                var userDetail = dBContext.userProfiles.Where(x=>x.Email==email).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, userDetail);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Account/UserProfilePost")]
+        public HttpResponseMessage UserProfilePost([FromBody] UserProfile userProfile)
+        {
+            try
+            {
+                using (DataContext dbContext = new DataContext())
+                {
+                    dbContext.userProfiles.Add(userProfile);
+                    dbContext.SaveChanges();
+                    var message = Request.CreateResponse(HttpStatusCode.Created, userProfile);
+                    return message;
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+        }
+        [HttpGet]
+        [Route("api/Account/GetUserData/{UserName}")]
+        public HttpResponseMessage GetUserData(string UserName)
+        {
+            using (DataContext dBContext = new DataContext())
+            {
+                var userDetail = dBContext.loginDatas.Where(x => x.username == UserName).ToList();
+                return Request.CreateResponse(HttpStatusCode.OK, userDetail);
+            }
+        }
+
     }
 }

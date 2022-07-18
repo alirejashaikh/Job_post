@@ -5,15 +5,11 @@ using System.Web;
 
 namespace Job_post.Models
 {
-    public class LoginData
+    public class CompanyQuery
     {
         public int Id { get; set; }
-        public string FullName { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
         public string Email { get; set; }
-
-        
-
+        public string Message { get; set; }
+        public string CompanyName { get; set; }
     }
 }

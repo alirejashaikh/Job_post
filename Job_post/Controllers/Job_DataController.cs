@@ -15,7 +15,7 @@ namespace Job_post.Controllers
 {
     public class Job_DataController : ApiController
     {
-        [CustomAuthenticationFilter]
+        
         public HttpResponseMessage Get()
         {
             using (DataContext dBContext = new DataContext())

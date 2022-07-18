@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Job_post.Models.DataContext";
         }
 
         protected override void Seed(Job_post.Models.DataContext context)
