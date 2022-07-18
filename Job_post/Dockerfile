@@ -8,14 +8,14 @@ WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
-COPY WebApp/*.csproj ./Job_post/
-COPY WebApp/*.config ./Job_post/
+COPY Job_post/*.csproj ./Job_post/
+COPY Job_post/*.config ./Job_post/
 RUN nuget restore
 
  
 
 # copy everything else and build app
-COPY WebApp/. ./Job_post/
+COPY Job_post/. ./Job_post/
 WORKDIR /app/Job_post
 RUN msbuild /p:Configuration=Release
 
