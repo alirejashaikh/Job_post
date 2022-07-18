@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "shoppingcartaks-d075"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "shoppingcartaks-d075"
+  template:
+    metadata:
+      labels:
+        app: "shoppingcartaks-d075"
+    spec:
+      containers:
+        - name: "shoppingcartaks-d075"
+          image: "shoppingreg.azurecr.io/shoppingcartaks"
+          ports:
+          - containerPort: 80
